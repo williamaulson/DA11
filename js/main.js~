@@ -1293,7 +1293,7 @@ window.onload = function() {
     	    snipeShoot = 1;
     	    //console.log('notInScript' + notInScript);
     }
-    
+    /*
     function script11(scriptSelection)
     {
     	    if (scriptSelection < 6)
@@ -1360,26 +1360,26 @@ window.onload = function() {
     	    	    {
     	    	    	    if (scriptSelection === 1)
     	    	    	    {
-    	    	    	    	    //subScript121();
+    	    	    	    	    subScript121();
     	    	    	    }
     	    	    	    else if (scriptSelection === 2)
     	    	    	    {
-    	    	    	    	    //subScript122();
+    	    	    	    	    subScript122();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript123();
+    	    	    	    	    subScript123();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 4)
     	    	    	    {
-    	    	    	    	    //subScript124();
+    	    	    	    	    subScript124();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript125();
+    	    	    	    	    subScript125();
     	    	    	    }
     	    	    }
     	    }
@@ -1389,22 +1389,22 @@ window.onload = function() {
     	    	    {
     	    	    	    if (scriptSelection === 6)
     	    	    	    {
-    	    	    	    	    //subScript126();
+    	    	    	    	    subScript126();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript127();
+    	    	    	    	    subScript127();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 8)
     	    	    	    {
-    	    	    	    	    //subScript128();
+    	    	    	    	    subScript128();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript129();
+    	    	    	    	    subScript129();
     	    	    	    }
     	    	    }
     	    }
@@ -1412,32 +1412,33 @@ window.onload = function() {
     
     function script13(scriptSelection)
     {
+    	    {
     	    if (scriptSelection < 6)
     	    {
     	    	    if (scriptSelection < 4)
     	    	    {
     	    	    	    if (scriptSelection === 1)
     	    	    	    {
-    	    	    	    	    //subScript131();
+    	    	    	    	    subScript131();
     	    	    	    }
     	    	    	    else if (scriptSelection === 2)
     	    	    	    {
-    	    	    	    	    //subScript132();
+    	    	    	    	    subScript132();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript133();
+    	    	    	    	    subScript133();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 4)
     	    	    	    {
-    	    	    	    	    //subScript134();
+    	    	    	    	    subScript134();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript135();
+    	    	    	    	    subScript135();
     	    	    	    }
     	    	    }
     	    }
@@ -1447,55 +1448,57 @@ window.onload = function() {
     	    	    {
     	    	    	    if (scriptSelection === 6)
     	    	    	    {
-    	    	    	    	    //subScript136();
+    	    	    	    	    subScript136();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript137();
+    	    	    	    	    subScript137();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 8)
     	    	    	    {
-    	    	    	    	    //subScript138();
+    	    	    	    	    subScript138();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript139();
+    	    	    	    	    subScript139();
     	    	    	    }
     	    	    }
     	    }
+    }
     }
     
     function script14(scriptSelection)
     {
+    	    {
     	    if (scriptSelection < 6)
     	    {
     	    	    if (scriptSelection < 4)
     	    	    {
     	    	    	    if (scriptSelection === 1)
     	    	    	    {
-    	    	    	    	    //subScript141();
+    	    	    	    	    subScript141();
     	    	    	    }
     	    	    	    else if (scriptSelection === 2)
     	    	    	    {
-    	    	    	    	    //subScript142();
+    	    	    	    	    subScript142();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript143();
+    	    	    	    	    subScript143();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 4)
     	    	    	    {
-    	    	    	    	    //subScript144();
+    	    	    	    	    subScript144();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript145();
+    	    	    	    	    subScript145();
     	    	    	    }
     	    	    }
     	    }
@@ -1505,55 +1508,57 @@ window.onload = function() {
     	    	    {
     	    	    	    if (scriptSelection === 6)
     	    	    	    {
-    	    	    	    	    //subScript146();
+    	    	    	    	    subScript146();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript147();
+    	    	    	    	    subScript147();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 8)
     	    	    	    {
-    	    	    	    	    //subScript148();
+    	    	    	    	    subScript148();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript149();
+    	    	    	    	    subScript149();
     	    	    	    }
     	    	    }
     	    }
+    }
     }
     
     function script15(scriptSelection)
     {
+    	    {
     	    if (scriptSelection < 6)
     	    {
     	    	    if (scriptSelection < 4)
     	    	    {
     	    	    	    if (scriptSelection === 1)
     	    	    	    {
-    	    	    	    	    //subScript151();
+    	    	    	    	    subScript151();
     	    	    	    }
     	    	    	    else if (scriptSelection === 2)
     	    	    	    {
-    	    	    	    	    //subScript152();
+    	    	    	    	    subScript152();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript153();
+    	    	    	    	    subScript153();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 4)
     	    	    	    {
-    	    	    	    	    //subScript154();
+    	    	    	    	    subScript154();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript155();
+    	    	    	    	    subScript155();
     	    	    	    }
     	    	    }
     	    }
@@ -1563,55 +1568,57 @@ window.onload = function() {
     	    	    {
     	    	    	    if (scriptSelection === 6)
     	    	    	    {
-    	    	    	    	    //subScript156();
+    	    	    	    	    subScript156();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript157();
+    	    	    	    	    subScript157();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 8)
     	    	    	    {
-    	    	    	    	    //subScript158();
+    	    	    	    	    subScript158();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript159();
+    	    	    	    	    subScript159();
     	    	    	    }
     	    	    }
     	    }
+    }
     }
     
     function script16(scriptSelection)
     {
+    	    {
     	    if (scriptSelection < 6)
     	    {
     	    	    if (scriptSelection < 4)
     	    	    {
     	    	    	    if (scriptSelection === 1)
     	    	    	    {
-    	    	    	    	    //subScript161();
+    	    	    	    	    subScript161();
     	    	    	    }
     	    	    	    else if (scriptSelection === 2)
     	    	    	    {
-    	    	    	    	    //subScript162();
+    	    	    	    	    subScript162();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript163();
+    	    	    	    	    subScript163();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 4)
     	    	    	    {
-    	    	    	    	    //subScript164();
+    	    	    	    	    subScript164();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript165();
+    	    	    	    	    subScript165();
     	    	    	    }
     	    	    }
     	    }
@@ -1621,55 +1628,57 @@ window.onload = function() {
     	    	    {
     	    	    	    if (scriptSelection === 6)
     	    	    	    {
-    	    	    	    	    //subScript166();
+    	    	    	    	    subScript166();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript167();
+    	    	    	    	    subScript167();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 8)
     	    	    	    {
-    	    	    	    	    //subScript168();
+    	    	    	    	    subScript168();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript169();
+    	    	    	    	    subScript169();
     	    	    	    }
     	    	    }
     	    }
+    }
     }
     
     function script17(scriptSelection)
     {
+    	    {
     	    if (scriptSelection < 6)
     	    {
     	    	    if (scriptSelection < 4)
     	    	    {
     	    	    	    if (scriptSelection === 1)
     	    	    	    {
-    	    	    	    	    //subScript171();
+    	    	    	    	    subScript171();
     	    	    	    }
     	    	    	    else if (scriptSelection === 2)
     	    	    	    {
-    	    	    	    	    //subScript172();
+    	    	    	    	    subScript172();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript173();
+    	    	    	    	    subScript173();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 4)
     	    	    	    {
-    	    	    	    	    //subScript174();
+    	    	    	    	    subScript174();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript175();
+    	    	    	    	    subScript175();
     	    	    	    }
     	    	    }
     	    }
@@ -1679,55 +1688,57 @@ window.onload = function() {
     	    	    {
     	    	    	    if (scriptSelection === 6)
     	    	    	    {
-    	    	    	    	    //subScript176();
+    	    	    	    	    subScript176();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript177();
+    	    	    	    	    subScript177();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 8)
     	    	    	    {
-    	    	    	    	    //subScript178();
+    	    	    	    	    subScript178();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript179();
+    	    	    	    	    subScript179();
     	    	    	    }
     	    	    }
     	    }
     }
+    }
     
     function script18(scriptSelection)
     {
+    	    {
     	    if (scriptSelection < 6)
     	    {
     	    	    if (scriptSelection < 4)
     	    	    {
     	    	    	    if (scriptSelection === 1)
     	    	    	    {
-    	    	    	    	    //subScript181();
+    	    	    	    	    subScript181();
     	    	    	    }
     	    	    	    else if (scriptSelection === 2)
     	    	    	    {
-    	    	    	    	    //subScript182();
+    	    	    	    	    subScript182();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript183();
+    	    	    	    	    subScript183();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 4)
     	    	    	    {
-    	    	    	    	    //subScript184();
+    	    	    	    	    subScript184();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript185();
+    	    	    	    	    subScript185();
     	    	    	    }
     	    	    }
     	    }
@@ -1737,25 +1748,26 @@ window.onload = function() {
     	    	    {
     	    	    	    if (scriptSelection === 6)
     	    	    	    {
-    	    	    	    	    //subScript186();
+    	    	    	    	    subScript186();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript187();
+    	    	    	    	    subScript187();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 8)
     	    	    	    {
-    	    	    	    	    //subScript188();
+    	    	    	    	    subScript188();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    //subScript189();
+    	    	    	    	    subScript189();
     	    	    	    }
     	    	    }
     	    }
+    }
     }
     
     function script21(scriptSelection)
@@ -2037,46 +2049,7 @@ window.onload = function() {
     {
     	    
     }
-    
-    function subScript111()
-    {
-    	    
-    }
-    
-    function subScript112()
-    {
-    	    
-    }
-    
-    function subScript113()
-    {
-    	    
-    }
-    
-    function subScript114()
-    {
-    	    
-    }
-    
-    function subScript115()
-    {
-    	    
-    }
-    
-    function subScript116()
-    {
-    	    
-    }
-    
-    function subScript117()
-    {
-    	    
-    }
-    
-    function subScript118()
-    {
-    	    
-    }
+    */
     
     /*
     function script11()
