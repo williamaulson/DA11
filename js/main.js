@@ -98,12 +98,17 @@ window.onload = function() {
     var avatarOnGround;
     var previousAvatarX;
     var avatarX = 0;
+    var previousEnemyX;
+    var enemyX = 0;
     var towards;
     var avatarTowards;
+    var enemyTowards;
     var avatarHigh;
     var avatarQuandrant;
     var enemyQuandrant;
     var scriptSelection;
+    var scriptDict = {};
+    var avatarFace = 1;
     
     function create() //create assets
     {
@@ -159,6 +164,8 @@ window.onload = function() {
     	    avatar.body.gravity.y = 1000;
     	    avatar.animations.add('left', [0, 1, 2, 3], 10, true);
     	    avatar.animations.add('right', [5, 6, 7, 8], 10, true);
+    	    avatar.animations.add('backleft', [3, 2, 1, 0], 10, true);
+    	    avatar.animations.add('backright', [8, 7, 6, 5], 10, true);
     	    avatar.frame = 5;
     	    
     	    enemy = game.add.sprite(892, 150, 'dude2');
@@ -193,6 +200,79 @@ window.onload = function() {
     	    damage.allowMultiple = true;
     	    death = game.add.audio('death');
     	    music.play('', 0, 1, true);
+    	    
+    	    scriptDict['111'] = script111;
+    	    scriptDict['112'] = script112;
+    	    scriptDict['113'] = script113;
+    	    scriptDict['114'] = script114;
+    	    scriptDict['115'] = script115;
+    	    scriptDict['116'] = script116;
+    	    scriptDict['117'] = script117;
+    	    scriptDict['118'] = script118;
+    	    scriptDict['119'] = script119;
+    	    scriptDict['121'] = script121;
+    	    scriptDict['122'] = script122;
+    	    scriptDict['123'] = script123;
+    	    scriptDict['124'] = script124;
+    	    scriptDict['125'] = script125;
+    	    scriptDict['126'] = script126;
+    	    scriptDict['127'] = script127;
+    	    scriptDict['128'] = script128;
+    	    scriptDict['129'] = script129;
+    	    scriptDict['131'] = script131;
+    	    scriptDict['132'] = script132;
+    	    scriptDict['133'] = script133;
+    	    scriptDict['134'] = script134;
+    	    scriptDict['135'] = script135;
+    	    scriptDict['136'] = script136;
+    	    scriptDict['137'] = script137;
+    	    scriptDict['138'] = script138;
+    	    scriptDict['139'] = script139;
+    	    scriptDict['141'] = script141;
+    	    scriptDict['142'] = script142;
+    	    scriptDict['143'] = script143;
+    	    scriptDict['144'] = script144;
+    	    scriptDict['145'] = script145;
+    	    scriptDict['146'] = script146;
+    	    scriptDict['147'] = script147;
+    	    scriptDict['148'] = script148;
+    	    scriptDict['149'] = script149;
+    	    scriptDict['151'] = script151;
+    	    scriptDict['152'] = script152;
+    	    scriptDict['153'] = script153;
+    	    scriptDict['154'] = script154;
+    	    scriptDict['155'] = script155;
+    	    scriptDict['156'] = script156;
+    	    scriptDict['157'] = script157;
+    	    scriptDict['158'] = script158;
+    	    scriptDict['159'] = script159;
+    	    scriptDict['161'] = script161;
+    	    scriptDict['162'] = script162;
+    	    scriptDict['163'] = script163;
+    	    scriptDict['164'] = script164;
+    	    scriptDict['165'] = script165;
+    	    scriptDict['166'] = script166;
+    	    scriptDict['167'] = script167;
+    	    scriptDict['168'] = script168;
+    	    scriptDict['169'] = script169;
+    	    scriptDict['171'] = script171;
+    	    scriptDict['172'] = script172;
+    	    scriptDict['173'] = script173;
+    	    scriptDict['174'] = script174;
+    	    scriptDict['175'] = script175;
+    	    scriptDict['176'] = script176;
+    	    scriptDict['177'] = script177;
+    	    scriptDict['178'] = script178;
+    	    scriptDict['179'] = script179;
+    	    scriptDict['181'] = script181;
+    	    scriptDict['182'] = script182;
+    	    scriptDict['183'] = script183;
+    	    scriptDict['184'] = script184;
+    	    scriptDict['185'] = script185;
+    	    scriptDict['186'] = script186;
+    	    scriptDict['187'] = script187;
+    	    scriptDict['188'] = script188;
+    	    scriptDict['189'] = script189;
     	        	    
     	    game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
     	    game.input.onDown.add(fullScreenStart, this);
@@ -222,8 +302,8 @@ window.onload = function() {
     
     function update() //run game logic
     {
-    	    console.log('enemy y' + enemy.body.y);
-    	    console.log('avatar y' + avatar.body.y);
+    	    //console.log('enemy y' + enemy.body.y);
+    	    //console.log('avatar y' + avatar.body.y);
     	    
     	    if ((avatarLife < 1) && (gameEnd === false)) //endgame check
     	    {
@@ -246,9 +326,14 @@ window.onload = function() {
     	       	    
     	    if (gameRunning) //game actually running
     	    {
+    	    	    previousAvatarX = avatarX;
+    	    	    avatarX = avatar.body.x;
+    	    	    previousEnemyX = enemyX;
+    	    	    enemyX = enemy.body.x;
     	    	    setScriptChecks();
     	    	    setScript();
     	    	    callScript(avatarQuandrant, enemyQuandrant, scriptSelection);
+    	    	    flip();
     	    	    
     	    	    
     	    	    
@@ -300,46 +385,46 @@ window.onload = function() {
     	    	    if (aKey.isDown && avatar.body.touching.down)
     	    	    {
     	    	    	    avatar.body.velocity.x = -200;
-    	    	    	    avatar.animations.play('left');
-    	    	    	    avatarFace = 0;
+    	    	    	    //avatar.animations.play('left');
+    	    	    	    //avatarFace = 0;
     	    	    }
     	    	    else if (dKey.isDown && avatar.body.touching.down)
     	    	    {
     	    	    	    avatar.body.velocity.x = 200;
-    	    	    	    avatar.animations.play('right');
-    	    	    	    avatarFace = 1;
+    	    	    	    //avatar.animations.play('right');
+    	    	    	    //avatarFace = 1;
     	    	    }
     	    	    else if (aKey.isDown)
     	    	    {
     	    	    	    avatar.body.velocity.x = -200;
-    	    	    	    avatar.animations.stop();
-    	    	    	    if (avatarFace)
-    	    	    	    {
-    	    	    	    	    avatar.frame = 5;  
-    	    	    	    }
-    	    	    	    else
-    	    	    	    {
-    	    	    	    	    avatar.frame = 0;   
-    	    	    	    }
-    	    	    	    avatarFace = 0;
+    	    	    	    //avatar.animations.stop();
+    	    	    	    //if (avatarFace)
+    	    	    	    //{
+    	    	    	    //	    avatar.frame = 5;  
+    	    	    	    //}
+    	    	    	    //else
+    	    	    	    //{
+    	    	    	   //	    avatar.frame = 0;   
+    	    	    	    //}
+    	    	    	    //avatarFace = 0;
     	    	    }
     	    	    else if (dKey.isDown)
     	    	    {
     	    	    	    avatar.body.velocity.x = 200;
-    	    	    	    avatar.animations.stop();
-    	    	    	    if (avatarFace)
-    	    	    	    {
-    	    	    	    	    avatar.frame = 5;  
-    	    	    	    }
-    	    	    	    else
-    	    	    	    {
-    	    	    	    	    avatar.frame = 0;   
-    	    	    	    }
-    	    	    	    avatarFace = 1;
+    	    	    	    //avatar.animations.stop();
+    	    	    	    //if (avatarFace)
+    	    	    	    //{
+    	    	    	    //	    avatar.frame = 5;  
+    	    	    	    //}
+    	    	    	    //else
+    	    	    	    //{
+    	    	    	    //	    avatar.frame = 0;   
+    	    	    	    //}
+    	    	    	    //avatarFace = 1;
     	    	    }
     	    	    else
     	    	    {
-    	    	    	    avatar.animations.stop();
+    	    	    	    /*avatar.animations.stop();
     	    	    	    if (avatarFace)
     	    	    	    {
     	    	    	    	    avatar.frame = 5;  
@@ -347,7 +432,7 @@ window.onload = function() {
     	    	    	    else
     	    	    	    {
     	    	    	    	    avatar.frame = 0;   
-    	    	    	    }
+    	    	    	    }*/
     	    	    }
     	    	    if (wKey.isDown && avatar.body.touching.down)
     	    	    {
@@ -358,7 +443,7 @@ window.onload = function() {
     	    	    {
     	    	    	    if ((shotCount < 3) && (game.time.now > shotDelay))
     	    	    	    {
-    	    	    	    	    if (avatarFace)
+    	    	    	    	    /*if (avatarFace)
     	    	    	    	    {
     	    	    	    	    	    shoot.play('', .6, 1, false);
     	    	    	    	    	    avatarShot = avatarShotGroup.create(avatar.x + 25, avatar.y + 15, 'shot');
@@ -379,7 +464,7 @@ window.onload = function() {
     	    	    	    	    	    avatarShot.animations.add('shotLeft', [0, 1], 10, true);
     	    	    	    	    	    avatarShot.animations.play('shotLeft');
     	    	    	    	    	    shotCount = shotCount + 1;   
-    	    	    	    	    }
+    	    	    	    	    }*/
     	    	    	    }
     	    	    }
     	    
@@ -387,7 +472,7 @@ window.onload = function() {
     	    	    {
     	    	    	    if ((fireShotCount < 2) && (game.time.now > fireShotDelay))
     	    	    	    {
-    	    	    	    	    if (avatarFace)
+    	    	    	    	    /*if (avatarFace)
     	    	    	    	    {
     	    	    	    	    	    shoot.play('', .6, 1, false);
     	    	    	    	    	    avatarFireShot = avatarFireShotGroup.create(avatar.x + 25, avatar.y + 15, 'fire');
@@ -413,7 +498,7 @@ window.onload = function() {
     	    	    	    	    	    avatarFireShot.animations.add('shotFireLeft', [0, 1, 2], 10, true);
     	    	    	    	    	    avatarFireShot.animations.play('shotFireLeft');
     	    	    	    	    	    fireShotCount = fireShotCount + 1;  
-    	    	    	    	    }
+    	    	    	    	    }*/
     	    	    	    }
     	    	    }
     	    	    if (regularShoot)
@@ -482,11 +567,11 @@ window.onload = function() {
     	    	    	    }
     	    	    }
     	    	    
-    	    	    if (notInScript)
-    	    	    {
-    	    	    	    flip();
-    	    	    }
-    	    	    
+    	    	    //if (notInScript)
+    	    	    //{
+    	    	    //	    flip();
+    	    	    //}
+    	    	    /*
     	    	    if (notInScript && avatar.x < 281 && enemy.x < 281)
     	    	    {
     	    	    	    //console.log('script11');
@@ -569,7 +654,7 @@ window.onload = function() {
     	    	    	    //console.log('script44');
     	    	    	    notInScript = 0;
     	    	    	    script44();
-    	    	    }
+    	    	    }*/
     	    	        	    	    
     	    	    /*
     	    	    //player 2 movement and attack
@@ -698,8 +783,6 @@ window.onload = function() {
     
     function setScriptChecks()
     {
-    	    previousAvatarX = avatarX;
-    	    avatarX = avatar.body.x;
     	    if (avatar.body.y < 478)
     	    {
     	    	    avatarOnGround = 0;
@@ -729,15 +812,26 @@ window.onload = function() {
     	    {
     	       	    avatarHigh = 0;
     	    }
-    	    avatarQuandrant = Math.floor((avatar.body.x - 50) / 115.5);
-    	    enemyQuandrant = Math.floor((enemy.body.x - 50) / 115.5);
+    	    avatarQuandrant = Math.floor((avatar.body.x - 50) / 115.5) + 1;
+    	    if (avatarQuandrant === 0)
+    	    {
+    	    	    avatarQuandrant = 1;
+    	    }
+    	    if (avatarQuandrant === 9)
+    	    {
+    	    	    avatarQuandrant = 8;
+    	    }
+    	    //console.log("avatar Quad: " + avatarQuandrant);
+    	    enemyQuandrant = Math.floor((enemy.body.x - 50) / 115.5) + 1;
+    	    //console.log("enemy Quad: " + enemyQuandrant);
     }
     
     function setScript()
     {
-    	    if (avatarOnGround)
+    	    if (!avatarOnGround)
     	    {
-    	    	    if (avatarTowards === 2)
+    	    	    var direction = getTowards();
+    	    	    if (direction === 2)
     	    	    {
     	    	    	    if (avatarHigh)
     	    	    	    {
@@ -748,7 +842,7 @@ window.onload = function() {
     	    	    	    	    scriptSelection = 2;
     	    	    	    }
     	    	    }
-    	    	    else if (avatarTowards === 0)
+    	    	    else if (direction === 0)
     	    	    {
     	    	    	    if (avatarHigh)
     	    	    	    {
@@ -791,6 +885,12 @@ window.onload = function() {
     
     function callScript(avatarQuandrant, enemyQuandrant, scriptSelection)
     {
+    	    var functionName = '' + avatarQuandrant + enemyQuandrant + scriptSelection + '';
+    	    //console.log("function name: " + functionName);
+    	    //scriptDict[functionName]();
+    	    
+    	    /*   
+    	    
     	    if (avatarQuandrant < 5)
     	    	    {
     	    	    	    if (avatarQuandrant < 3)
@@ -1250,21 +1350,107 @@ window.onload = function() {
     	    	    	    	    	    }
     	    	    	    	    }
     	    	    	    }
-    	    	    }
+    	    	    }*/
+    }
+    
+    function getTowards()
+    {
+    	    towards = previousAvatarX - avatarX;
+    	    if (towards < 0)
+    	    {
+    	       	    avatarTowards = 2;
+    	    }
+    	    else if (towards > 0)
+    	    {
+    	       	    avatarTowards = 0;
+    	    }
+    	    else
+    	    {
+    	       	    avatarTowards = 1;
+    	    }
+    	    return avatarTowards;
+    }
+    
+    function getEnemyTowards()
+    {
+    	    var eTowards = previousEnemyX - enemyX;
+    	    if (eTowards < 0)
+    	    {
+    	       	    enemyTowards = 2;
+    	    }
+    	    else if (eTowards > 0)
+    	    {
+    	       	    enemyTowards = 0;
+    	    }
+    	    else
+    	    {
+    	       	    enemyTowards = 1;
+    	    }
+    	    return enemyTowards;
     }
     
     function flip()
     {
-    	   if (avatar.body.x < enemy.body.x)
-    	    	    	    {
-    	    	    	    	    enemy.frame = 0;
-    	    	    	    	    enemyFace = 0;
-    	    	    	    }
-    	    	    	    else
-    	    	    	    {
-    	    	    	    	    enemy.frame = 5;
-    	    	    	    	    enemyFace = 1;
-    	    	    	    } 
+    	    console.log("in flip");
+    	    var direction = getTowards();
+    	    var edirection = getEnemyTowards();
+    	    console.log("directon" + direction);
+    	    console.log("edirection" + edirection);
+    	    if (avatar.body.x < enemy.body.x)
+    	    {
+    	    	    if (direction === 2 && avatarOnGround)
+    	    	    {
+    	    	    	    //console.log("move avatar right");
+    	    	    	    avatar.animations.play('right');
+    	    	    }
+    	    	    else if (direction === 0 && avatarOnGround)
+    	    	    {
+    	    	    	    avatar.animations.play('backright');
+    	    	    }
+    	    	    else
+    	    	    {
+    	    	    	    avatar.frame = 5;
+    	    	    }
+    	    	    if (edirection === 2)
+    	    	    {
+    	    	    	    //play left forward e
+    	    	    }
+    	    	    else if (edirection === 0)
+    	    	    {
+    	    	    	    //play left backwards e
+    	    	    }
+    	    	    else
+    	    	    {
+    	    	    	    //play left still e
+    	    	    }
+    	    }
+    	    else if (avatar.body.x > enemy.body.x)
+    	    {
+    	    	    if (direction === 2 && avatarOnGround)
+    	    	    {
+    	    	    	    avatar.animations.play('left');
+    	    	    }
+    	    	    else if (direction === 0 && avatarOnGround)
+    	    	    {
+    	    	    	    avatar.animations.play('backleft');
+    	    	    }
+    	    	    else
+    	    	    {
+    	    	    	    avatar.frame = 0;
+    	    	    }
+    	    	    if (edirection === 2)
+    	    	    {
+    	    	    	    //play right forward e
+    	    	    }
+    	    	    else if (edirection === 0)
+    	    	    {
+    	    	    	    //play right backwards e
+    	    	    }
+    	    	    else
+    	    	    {
+    	    	    	    //play right still e
+    	    	    }
+    	    }
     }
     
     function airEnd()
@@ -1294,7 +1480,7 @@ window.onload = function() {
     	    //console.log('notInScript' + notInScript);
     }
     
-    function script11(scriptSelection)
+    /*function script11(scriptSelection)
     {
     	    if (scriptSelection < 6)
     	    {
@@ -2036,48 +2222,367 @@ window.onload = function() {
     function script88(scriptSelection)
     {
     	    
+    }*/
+    
+    function script111()
+    {
+    	    //console.log("grapefruit");
     }
     
-    function subScript111()
+    function script112()
     {
     	    
     }
     
-    function subScript112()
+    function script113()
     {
     	    
     }
     
-    function subScript113()
+    function script114()
     {
     	    
     }
     
-    function subScript114()
+    function script115()
     {
     	    
     }
     
-    function subScript115()
+    function script116()
     {
     	    
     }
     
-    function subScript116()
+    function script117()
     {
     	    
     }
     
-    function subScript117()
+    function script118()
     {
     	    
     }
     
-    function subScript118()
+    function script119()
     {
     	    
     }
     
+    function script121()
+    {
+    	    
+    }
+    
+    function script122()
+    {
+    	    
+    }
+    
+    function script123()
+    {
+    	    
+    }
+    
+    function script124()
+    {
+    	    
+    }
+    
+    function script125()
+    {
+    	    
+    }
+    
+    function script126()
+    {
+    	    
+    }
+    
+    function script127()
+    {
+    	    
+    }
+    
+    function script128()
+    {
+    	    
+    }
+    
+    function script129()
+    {
+    	    
+    }
+    
+    function script131()
+    {
+    	    
+    }
+    
+    function script132()
+    {
+    	    
+    }
+    
+    function script133()
+    {
+    	    
+    }
+    
+    function script134()
+    {
+    	    
+    }
+    
+    function script135()
+    {
+    	    
+    }
+    
+    function script136()
+    {
+    	    
+    }
+    
+    function script137()
+    {
+    	    
+    }
+    
+    function script138()
+    {
+    	    
+    }
+    
+    function script139()
+    {
+    	    
+    }
+    
+    function script141()
+    {
+    	    
+    }
+    
+    function script142()
+    {
+    	    
+    }
+    
+    function script143()
+    {
+    	    
+    }
+    
+    function script144()
+    {
+    	    
+    }
+    
+    function script145()
+    {
+    	    
+    }
+    
+    function script146()
+    {
+    	    
+    }
+    
+    function script147()
+    {
+    	    
+    }
+    
+    function script148()
+    {
+    	    
+    }
+    
+    function script149()
+    {
+    	    
+    }
+    
+    function script151()
+    {
+    	    
+    }
+    
+    function script152()
+    {
+    	    
+    }
+    
+    function script153()
+    {
+    	    
+    }
+    
+    function script154()
+    {
+    	    
+    }
+    
+    function script155()
+    {
+    	    
+    }
+    
+    function script156()
+    {
+    	    
+    }
+    
+    function script157()
+    {
+    	    
+    }
+    
+    function script158()
+    {
+    	    
+    }
+    
+    function script159()
+    {
+    	    
+    }
+    
+    function script161()
+    {
+    	    
+    }
+    
+    function script162()
+    {
+    	    
+    }
+    
+    function script163()
+    {
+    	    
+    }
+    
+    function script164()
+    {
+    	    
+    }
+    
+    function script165()
+    {
+    	    
+    }
+    
+    function script166()
+    {
+    	    
+    }
+    
+    function script167()
+    {
+    	    
+    }
+    
+    function script168()
+    {
+    	    
+    }
+    
+    function script169()
+    {
+    	    
+    }
+    
+    function script171()
+    {
+    	    
+    }
+    
+    function script172()
+    {
+    	    
+    }
+    
+    function script173()
+    {
+    	    
+    }
+    
+    function script174()
+    {
+    	    
+    }
+    
+    function script175()
+    {
+    	    
+    }
+    
+    function script176()
+    {
+    	    
+    }
+    
+    function script177()
+    {
+    	    
+    }
+    
+    function script178()
+    {
+    	    
+    }
+    
+    function script179()
+    {
+    	    
+    }
+    
+    function script181()
+    {
+    	  //console.log("181");  
+    }
+    
+    function script182()
+    {
+    	    //console.log("182");
+    }
+    
+    function script183()
+    {
+    	    //console.log("183");
+    }
+    
+    function script184()
+    {
+    	    //console.log("184");
+    }
+    
+    function script185()
+    {
+    	    //console.log("185");
+    }
+    
+    function script186()
+    {
+    	    //console.log("186");    	    
+    }
+    
+    function script187()
+    {
+    	    //console.log("187");
+    }
+    
+    function script188()
+    {
+    	    //console.log("188");
+    }
+    
+    function script189()
+    {
+    	    //console.log("189");
+    }
     /*
     function script11()
     {

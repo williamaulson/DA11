@@ -98,12 +98,16 @@ window.onload = function() {
     var avatarOnGround;
     var previousAvatarX;
     var avatarX = 0;
+    var previousEnemyX;
+    var enemyX = 0;
     var towards;
     var avatarTowards;
     var avatarHigh;
     var avatarQuandrant;
     var enemyQuandrant;
     var scriptSelection;
+    var scriptDict = {};
+    var avatarFace = 1;
     
     function create() //create assets
     {
@@ -193,6 +197,71 @@ window.onload = function() {
     	    damage.allowMultiple = true;
     	    death = game.add.audio('death');
     	    music.play('', 0, 1, true);
+    	    
+    	    scriptDict['111'] = script111();
+    	    scriptDict['112'] = script112();
+    	    scriptDict['113'] = script113();
+    	    scriptDict['114'] = script114();
+    	    scriptDict['115'] = script115();
+    	    scriptDict['116'] = script116();
+    	    scriptDict['117'] = script117();
+    	    scriptDict['118'] = script118();
+    	    scriptDict['121'] = script121();
+    	    scriptDict['122'] = script122();
+    	    scriptDict['123'] = script123();
+    	    scriptDict['124'] = script124();
+    	    scriptDict['125'] = script125();
+    	    scriptDict['126'] = script126();
+    	    scriptDict['127'] = script127();
+    	    scriptDict['128'] = script128();
+    	    scriptDict['131'] = script131();
+    	    scriptDict['132'] = script132();
+    	    scriptDict['133'] = script133();
+    	    scriptDict['134'] = script134();
+    	    scriptDict['135'] = script135();
+    	    scriptDict['136'] = script136();
+    	    scriptDict['137'] = script137();
+    	    scriptDict['138'] = script138();
+    	    scriptDict['141'] = script141();
+    	    scriptDict['142'] = script142();
+    	    scriptDict['143'] = script143();
+    	    scriptDict['144'] = script144();
+    	    scriptDict['145'] = script145();
+    	    scriptDict['146'] = script146();
+    	    scriptDict['147'] = script147();
+    	    scriptDict['148'] = script148();
+    	    scriptDict['151'] = script151();
+    	    scriptDict['152'] = script152();
+    	    scriptDict['153'] = script153();
+    	    scriptDict['154'] = script154();
+    	    scriptDict['155'] = script155();
+    	    scriptDict['156'] = script156();
+    	    scriptDict['157'] = script157();
+    	    scriptDict['158'] = script158();
+    	    scriptDict['161'] = script161();
+    	    scriptDict['162'] = script162();
+    	    scriptDict['163'] = script163();
+    	    scriptDict['164'] = script164();
+    	    scriptDict['165'] = script165();
+    	    scriptDict['166'] = script166();
+    	    scriptDict['167'] = script167();
+    	    scriptDict['168'] = script168();
+    	    scriptDict['171'] = script171();
+    	    scriptDict['172'] = script172();
+    	    scriptDict['173'] = script173();
+    	    scriptDict['174'] = script174();
+    	    scriptDict['175'] = script175();
+    	    scriptDict['176'] = script176();
+    	    scriptDict['177'] = script177();
+    	    scriptDict['178'] = script178();
+    	    scriptDict['181'] = script181();
+    	    scriptDict['182'] = script182();
+    	    scriptDict['183'] = script183();
+    	    scriptDict['184'] = script184();
+    	    scriptDict['185'] = script185();
+    	    scriptDict['186'] = script186();
+    	    scriptDict['187'] = script187();
+    	    scriptDict['188'] = script188();
     	        	    
     	    game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
     	    game.input.onDown.add(fullScreenStart, this);
@@ -246,9 +315,14 @@ window.onload = function() {
     	       	    
     	    if (gameRunning) //game actually running
     	    {
+    	    	    previousAvatarX = avatarX;
+    	    	    avatarX = avatar.body.x;
+    	    	    previousEnemyX = enemyX;
+    	    	    enemyX = enemy.body.x;
     	    	    setScriptChecks();
     	    	    setScript();
     	    	    callScript(avatarQuandrant, enemyQuandrant, scriptSelection);
+    	    	    flip();
     	    	    
     	    	    
     	    	    
@@ -482,11 +556,11 @@ window.onload = function() {
     	    	    	    }
     	    	    }
     	    	    
-    	    	    if (notInScript)
-    	    	    {
-    	    	    	    flip();
-    	    	    }
-    	    	    
+    	    	    //if (notInScript)
+    	    	    //{
+    	    	    //	    flip();
+    	    	    //}
+    	    	    /*
     	    	    if (notInScript && avatar.x < 281 && enemy.x < 281)
     	    	    {
     	    	    	    //console.log('script11');
@@ -569,7 +643,7 @@ window.onload = function() {
     	    	    	    //console.log('script44');
     	    	    	    notInScript = 0;
     	    	    	    script44();
-    	    	    }
+    	    	    }*/
     	    	        	    	    
     	    	    /*
     	    	    //player 2 movement and attack
@@ -698,8 +772,6 @@ window.onload = function() {
     
     function setScriptChecks()
     {
-    	    previousAvatarX = avatarX;
-    	    avatarX = avatar.body.x;
     	    if (avatar.body.y < 478)
     	    {
     	    	    avatarOnGround = 0;
@@ -729,15 +801,26 @@ window.onload = function() {
     	    {
     	       	    avatarHigh = 0;
     	    }
-    	    avatarQuandrant = Math.floor((avatar.body.x - 50) / 115.5);
-    	    enemyQuandrant = Math.floor((enemy.body.x - 50) / 115.5);
+    	    avatarQuandrant = Math.floor((avatar.body.x - 50) / 115.5) + 1;
+    	    if (avatarQuandrant === 0)
+    	    {
+    	    	    avatarQuandrant = 1;
+    	    }
+    	    if (avatarQuandrant === 9)
+    	    {
+    	    	    avatarQuandrant = 8;
+    	    }
+    	    console.log("avatar Quad: " + avatarQuandrant);
+    	    enemyQuandrant = Math.floor((enemy.body.x - 50) / 115.5) + 1;
+    	    console.log("enemy Quad: " + enemyQuandrant);
     }
     
     function setScript()
     {
-    	    if (avatarOnGround)
+    	    if (!avatarOnGround)
     	    {
-    	    	    if (avatarTowards === 2)
+    	    	    var direction = getTowards();
+    	    	    if (direction === 2)
     	    	    {
     	    	    	    if (avatarHigh)
     	    	    	    {
@@ -748,7 +831,7 @@ window.onload = function() {
     	    	    	    	    scriptSelection = 2;
     	    	    	    }
     	    	    }
-    	    	    else if (avatarTowards === 0)
+    	    	    else if (direction === 0)
     	    	    {
     	    	    	    if (avatarHigh)
     	    	    	    {
@@ -791,6 +874,12 @@ window.onload = function() {
     
     function callScript(avatarQuandrant, enemyQuandrant, scriptSelection)
     {
+    	    var functionName = '' + avatarQuandrant + enemyQuandrant + scriptSelection + '';
+    	    console.log("function name: " + functionName);
+    	    //scriptDict[functionName];
+    	    
+    	    /*   
+    	    
     	    if (avatarQuandrant < 5)
     	    	    {
     	    	    	    if (avatarQuandrant < 3)
@@ -1250,21 +1339,104 @@ window.onload = function() {
     	    	    	    	    	    }
     	    	    	    	    }
     	    	    	    }
-    	    	    }
+    	    	    }*/
+    }
+    
+    function getTowards()
+    {
+    	    towards = previousAvatarX - avatarX;
+    	    if (towards < 0)
+    	    {
+    	       	    avatarTowards = 2;
+    	    }
+    	    else if (towards > 0)
+    	    {
+    	       	    avatarTowards = 0;
+    	    }
+    	    else
+    	    {
+    	       	    avatarTowards = 1;
+    	    }
+    	    return towards;
+    }
+    
+    function getEnemyTowards()
+    {
+    	    eTowards = previousEnemyX - enemyX;
+    	    if (eTowards < 0)
+    	    {
+    	       	    avatarTowards = 2;
+    	    }
+    	    else if (eTowards > 0)
+    	    {
+    	       	    avatarTowards = 0;
+    	    }
+    	    else
+    	    {
+    	       	    avatarTowards = 1;
+    	    }
+    	    return towards;
     }
     
     function flip()
     {
-    	   if (avatar.body.x < enemy.body.x)
-    	    	    	    {
-    	    	    	    	    enemy.frame = 0;
-    	    	    	    	    enemyFace = 0;
-    	    	    	    }
-    	    	    	    else
-    	    	    	    {
-    	    	    	    	    enemy.frame = 5;
-    	    	    	    	    enemyFace = 1;
-    	    	    	    } 
+    	    direction = getTowards();
+    	    edirection = getEnemyTowards();
+    	    if (avatar.body.x < enemy.body.x)
+    	    {
+    	    	    if (direction === 2)
+    	    	    {
+    	    	    	    //play right forward a
+    	    	    }
+    	    	    else if ((direction === 0)
+    	    	    {
+    	    	    	    //play right backwards a
+    	    	    }
+    	    	    else
+    	    	    {
+    	    	    	    //play right still a
+    	    	    }
+    	    	    if (edirection === 2)
+    	    	    {
+    	    	    	    //play left forward e
+    	    	    }
+    	    	    else if ((edirection === 0)
+    	    	    {
+    	    	    	    //play left backwards e
+    	    	    }
+    	    	    else
+    	    	    {
+    	    	    	    //play left still e
+    	    	    }
+    	  	    	   
+    	    }
+    	    else if (avatar.body.x > enemy.body.x)
+    	    {
+    	    	    if (direction === 2)
+    	    	    {
+    	    	    	    //play left forward a
+    	    	    }
+    	    	    else if ((direction === 0)
+    	    	    {
+    	    	    	    //play left backwards a
+    	    	    }
+    	    	    else
+    	    	    {
+    	    	    	    //play left still a
+    	    	    }
+    	    	    if (edirection === 2)
+    	    	    {
+    	    	    	    //play right forward e
+    	    	    }
+    	    	    else if ((edirection === 0)
+    	    	    {
+    	    	    	    //play right backwards e
+    	    	    }
+    	    	    else
+    	    	    {
+    	    	    	    //play right still e
+    	    	    }
+    	    }
     }
     
     function airEnd()
@@ -1293,8 +1465,8 @@ window.onload = function() {
     	    snipeShoot = 1;
     	    //console.log('notInScript' + notInScript);
     }
-    /*
-    function script11(scriptSelection)
+    
+    /*function script11(scriptSelection)
     {
     	    if (scriptSelection < 6)
     	    {
@@ -1360,26 +1532,26 @@ window.onload = function() {
     	    	    {
     	    	    	    if (scriptSelection === 1)
     	    	    	    {
-    	    	    	    	    subScript121();
+    	    	    	    	    //subScript121();
     	    	    	    }
     	    	    	    else if (scriptSelection === 2)
     	    	    	    {
-    	    	    	    	    subScript122();
+    	    	    	    	    //subScript122();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript123();
+    	    	    	    	    //subScript123();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 4)
     	    	    	    {
-    	    	    	    	    subScript124();
+    	    	    	    	    //subScript124();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript125();
+    	    	    	    	    //subScript125();
     	    	    	    }
     	    	    }
     	    }
@@ -1389,22 +1561,22 @@ window.onload = function() {
     	    	    {
     	    	    	    if (scriptSelection === 6)
     	    	    	    {
-    	    	    	    	    subScript126();
+    	    	    	    	    //subScript126();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript127();
+    	    	    	    	    //subScript127();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 8)
     	    	    	    {
-    	    	    	    	    subScript128();
+    	    	    	    	    //subScript128();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript129();
+    	    	    	    	    //subScript129();
     	    	    	    }
     	    	    }
     	    }
@@ -1412,33 +1584,32 @@ window.onload = function() {
     
     function script13(scriptSelection)
     {
-    	    {
     	    if (scriptSelection < 6)
     	    {
     	    	    if (scriptSelection < 4)
     	    	    {
     	    	    	    if (scriptSelection === 1)
     	    	    	    {
-    	    	    	    	    subScript131();
+    	    	    	    	    //subScript131();
     	    	    	    }
     	    	    	    else if (scriptSelection === 2)
     	    	    	    {
-    	    	    	    	    subScript132();
+    	    	    	    	    //subScript132();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript133();
+    	    	    	    	    //subScript133();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 4)
     	    	    	    {
-    	    	    	    	    subScript134();
+    	    	    	    	    //subScript134();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript135();
+    	    	    	    	    //subScript135();
     	    	    	    }
     	    	    }
     	    }
@@ -1448,57 +1619,55 @@ window.onload = function() {
     	    	    {
     	    	    	    if (scriptSelection === 6)
     	    	    	    {
-    	    	    	    	    subScript136();
+    	    	    	    	    //subScript136();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript137();
+    	    	    	    	    //subScript137();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 8)
     	    	    	    {
-    	    	    	    	    subScript138();
+    	    	    	    	    //subScript138();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript139();
+    	    	    	    	    //subScript139();
     	    	    	    }
     	    	    }
     	    }
-    }
     }
     
     function script14(scriptSelection)
     {
-    	    {
     	    if (scriptSelection < 6)
     	    {
     	    	    if (scriptSelection < 4)
     	    	    {
     	    	    	    if (scriptSelection === 1)
     	    	    	    {
-    	    	    	    	    subScript141();
+    	    	    	    	    //subScript141();
     	    	    	    }
     	    	    	    else if (scriptSelection === 2)
     	    	    	    {
-    	    	    	    	    subScript142();
+    	    	    	    	    //subScript142();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript143();
+    	    	    	    	    //subScript143();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 4)
     	    	    	    {
-    	    	    	    	    subScript144();
+    	    	    	    	    //subScript144();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript145();
+    	    	    	    	    //subScript145();
     	    	    	    }
     	    	    }
     	    }
@@ -1508,57 +1677,55 @@ window.onload = function() {
     	    	    {
     	    	    	    if (scriptSelection === 6)
     	    	    	    {
-    	    	    	    	    subScript146();
+    	    	    	    	    //subScript146();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript147();
+    	    	    	    	    //subScript147();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 8)
     	    	    	    {
-    	    	    	    	    subScript148();
+    	    	    	    	    //subScript148();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript149();
+    	    	    	    	    //subScript149();
     	    	    	    }
     	    	    }
     	    }
-    }
     }
     
     function script15(scriptSelection)
     {
-    	    {
     	    if (scriptSelection < 6)
     	    {
     	    	    if (scriptSelection < 4)
     	    	    {
     	    	    	    if (scriptSelection === 1)
     	    	    	    {
-    	    	    	    	    subScript151();
+    	    	    	    	    //subScript151();
     	    	    	    }
     	    	    	    else if (scriptSelection === 2)
     	    	    	    {
-    	    	    	    	    subScript152();
+    	    	    	    	    //subScript152();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript153();
+    	    	    	    	    //subScript153();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 4)
     	    	    	    {
-    	    	    	    	    subScript154();
+    	    	    	    	    //subScript154();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript155();
+    	    	    	    	    //subScript155();
     	    	    	    }
     	    	    }
     	    }
@@ -1568,57 +1735,55 @@ window.onload = function() {
     	    	    {
     	    	    	    if (scriptSelection === 6)
     	    	    	    {
-    	    	    	    	    subScript156();
+    	    	    	    	    //subScript156();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript157();
+    	    	    	    	    //subScript157();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 8)
     	    	    	    {
-    	    	    	    	    subScript158();
+    	    	    	    	    //subScript158();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript159();
+    	    	    	    	    //subScript159();
     	    	    	    }
     	    	    }
     	    }
-    }
     }
     
     function script16(scriptSelection)
     {
-    	    {
     	    if (scriptSelection < 6)
     	    {
     	    	    if (scriptSelection < 4)
     	    	    {
     	    	    	    if (scriptSelection === 1)
     	    	    	    {
-    	    	    	    	    subScript161();
+    	    	    	    	    //subScript161();
     	    	    	    }
     	    	    	    else if (scriptSelection === 2)
     	    	    	    {
-    	    	    	    	    subScript162();
+    	    	    	    	    //subScript162();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript163();
+    	    	    	    	    //subScript163();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 4)
     	    	    	    {
-    	    	    	    	    subScript164();
+    	    	    	    	    //subScript164();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript165();
+    	    	    	    	    //subScript165();
     	    	    	    }
     	    	    }
     	    }
@@ -1628,57 +1793,55 @@ window.onload = function() {
     	    	    {
     	    	    	    if (scriptSelection === 6)
     	    	    	    {
-    	    	    	    	    subScript166();
+    	    	    	    	    //subScript166();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript167();
+    	    	    	    	    //subScript167();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 8)
     	    	    	    {
-    	    	    	    	    subScript168();
+    	    	    	    	    //subScript168();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript169();
+    	    	    	    	    //subScript169();
     	    	    	    }
     	    	    }
     	    }
-    }
     }
     
     function script17(scriptSelection)
     {
-    	    {
     	    if (scriptSelection < 6)
     	    {
     	    	    if (scriptSelection < 4)
     	    	    {
     	    	    	    if (scriptSelection === 1)
     	    	    	    {
-    	    	    	    	    subScript171();
+    	    	    	    	    //subScript171();
     	    	    	    }
     	    	    	    else if (scriptSelection === 2)
     	    	    	    {
-    	    	    	    	    subScript172();
+    	    	    	    	    //subScript172();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript173();
+    	    	    	    	    //subScript173();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 4)
     	    	    	    {
-    	    	    	    	    subScript174();
+    	    	    	    	    //subScript174();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript175();
+    	    	    	    	    //subScript175();
     	    	    	    }
     	    	    }
     	    }
@@ -1688,57 +1851,55 @@ window.onload = function() {
     	    	    {
     	    	    	    if (scriptSelection === 6)
     	    	    	    {
-    	    	    	    	    subScript176();
+    	    	    	    	    //subScript176();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript177();
+    	    	    	    	    //subScript177();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 8)
     	    	    	    {
-    	    	    	    	    subScript178();
+    	    	    	    	    //subScript178();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript179();
+    	    	    	    	    //subScript179();
     	    	    	    }
     	    	    }
     	    }
-    }
     }
     
     function script18(scriptSelection)
     {
-    	    {
     	    if (scriptSelection < 6)
     	    {
     	    	    if (scriptSelection < 4)
     	    	    {
     	    	    	    if (scriptSelection === 1)
     	    	    	    {
-    	    	    	    	    subScript181();
+    	    	    	    	    //subScript181();
     	    	    	    }
     	    	    	    else if (scriptSelection === 2)
     	    	    	    {
-    	    	    	    	    subScript182();
+    	    	    	    	    //subScript182();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript183();
+    	    	    	    	    //subScript183();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 4)
     	    	    	    {
-    	    	    	    	    subScript184();
+    	    	    	    	    //subScript184();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript185();
+    	    	    	    	    //subScript185();
     	    	    	    }
     	    	    }
     	    }
@@ -1748,26 +1909,25 @@ window.onload = function() {
     	    	    {
     	    	    	    if (scriptSelection === 6)
     	    	    	    {
-    	    	    	    	    subScript186();
+    	    	    	    	    //subScript186();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript187();
+    	    	    	    	    //subScript187();
     	    	    	    }
     	    	    }
     	    	    else
     	    	    {
     	    	    	    if (scriptSelection === 8)
     	    	    	    {
-    	    	    	    	    subScript188();
+    	    	    	    	    //subScript188();
     	    	    	    }
     	    	    	    else
     	    	    	    {
-    	    	    	    	    subScript189();
+    	    	    	    	    //subScript189();
     	    	    	    }
     	    	    }
     	    }
-    }
     }
     
     function script21(scriptSelection)
@@ -2048,9 +2208,367 @@ window.onload = function() {
     function script88(scriptSelection)
     {
     	    
-    }
-    */
+    }*/
     
+    function script111()
+    {
+    	    
+    }
+    
+    function script112()
+    {
+    	    
+    }
+    
+    function script113()
+    {
+    	    
+    }
+    
+    function script114()
+    {
+    	    
+    }
+    
+    function script115()
+    {
+    	    
+    }
+    
+    function script116()
+    {
+    	    
+    }
+    
+    function script117()
+    {
+    	    
+    }
+    
+    function script118()
+    {
+    	    
+    }
+    
+    function script119()
+    {
+    	    
+    }
+    
+    function script121()
+    {
+    	    
+    }
+    
+    function script122()
+    {
+    	    
+    }
+    
+    function script123()
+    {
+    	    
+    }
+    
+    function script124()
+    {
+    	    
+    }
+    
+    function script125()
+    {
+    	    
+    }
+    
+    function script126()
+    {
+    	    
+    }
+    
+    function script127()
+    {
+    	    
+    }
+    
+    function script128()
+    {
+    	    
+    }
+    
+    function script129()
+    {
+    	    
+    }
+    
+    function script131()
+    {
+    	    
+    }
+    
+    function script132()
+    {
+    	    
+    }
+    
+    function script133()
+    {
+    	    
+    }
+    
+    function script134()
+    {
+    	    
+    }
+    
+    function script135()
+    {
+    	    
+    }
+    
+    function script136()
+    {
+    	    
+    }
+    
+    function script137()
+    {
+    	    
+    }
+    
+    function script138()
+    {
+    	    
+    }
+    
+    function script139()
+    {
+    	    
+    }
+    
+    function script141()
+    {
+    	    
+    }
+    
+    function script142()
+    {
+    	    
+    }
+    
+    function script143()
+    {
+    	    
+    }
+    
+    function script144()
+    {
+    	    
+    }
+    
+    function script145()
+    {
+    	    
+    }
+    
+    function script146()
+    {
+    	    
+    }
+    
+    function script147()
+    {
+    	    
+    }
+    
+    function script148()
+    {
+    	    
+    }
+    
+    function script149()
+    {
+    	    
+    }
+    
+    function script151()
+    {
+    	    
+    }
+    
+    function script152()
+    {
+    	    
+    }
+    
+    function script153()
+    {
+    	    
+    }
+    
+    function script154()
+    {
+    	    
+    }
+    
+    function script155()
+    {
+    	    
+    }
+    
+    function script156()
+    {
+    	    
+    }
+    
+    function script157()
+    {
+    	    
+    }
+    
+    function script158()
+    {
+    	    
+    }
+    
+    function script159()
+    {
+    	    
+    }
+    
+    function script161()
+    {
+    	    
+    }
+    
+    function script162()
+    {
+    	    
+    }
+    
+    function script163()
+    {
+    	    
+    }
+    
+    function script164()
+    {
+    	    
+    }
+    
+    function script165()
+    {
+    	    
+    }
+    
+    function script166()
+    {
+    	    
+    }
+    
+    function script167()
+    {
+    	    
+    }
+    
+    function script168()
+    {
+    	    
+    }
+    
+    function script169()
+    {
+    	    
+    }
+    
+    function script171()
+    {
+    	    
+    }
+    
+    function script172()
+    {
+    	    
+    }
+    
+    function script173()
+    {
+    	    
+    }
+    
+    function script174()
+    {
+    	    
+    }
+    
+    function script175()
+    {
+    	    
+    }
+    
+    function script176()
+    {
+    	    
+    }
+    
+    function script177()
+    {
+    	    
+    }
+    
+    function script178()
+    {
+    	    
+    }
+    
+    function script179()
+    {
+    	    
+    }
+    
+    function script181()
+    {
+    	    
+    }
+    
+    function script182()
+    {
+    	    
+    }
+    
+    function script183()
+    {
+    	    
+    }
+    
+    function script184()
+    {
+    	    
+    }
+    
+    function script185()
+    {
+    	    
+    }
+    
+    function script186()
+    {
+    	    console.log("Fuck me");    	    
+    }
+    
+    function script187()
+    {
+    	    
+    }
+    
+    function script188()
+    {
+    	    
+    }
+    
+    function script189()
+    {
+    	    
+    }
     /*
     function script11()
     {
